@@ -1,21 +1,28 @@
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.Scanner;
 import java.net.URL;
 import java.io.InputStream;
-import java.util.Scanner;
-// подключаем нужные нам классы и пакеты
+import java.nio.file.Files;
+import java.nio.file.Paths;
+// подключаем нужные классы и пакеты
+
+
+
 
 
 public class RaiseFile {
     
     public static void main(String[] args) throws IOException {
-		Scanner sc = new Scanner(System.in); // создаем объект Сканер
+Scanner sc = new Scanner(System.in); // создаем объект сканер для чтения из консоли
+System.out.println("Введите URL файла.");
+	String image = sc.nextLine(); // задаем переменную "картинка", с присвоением значения из консоли
 
-System.out.println("1.Введите URL файла.\n" + "2.Нажмите \"Enter\".\n" + "3.Введите название нового файла.\n" + "4.Нажмите \"Enter\".");
-		
-		Files.copy(new URL(sc.nextLine()).openStream(), Paths.get(sc.nextLine()));
-// читаем из консоли адрес URL. получает InputStream у интернет-объекта. копируем полученные данные в новый файл (имя файла получаем из консоли)
+URL url = new URL(image); // создаем объект ЮРД, с адресом полученным из консоли
+InputStream input = url.openStream(); // получает InputStream у интернет-объекта
+System.out.println("Введите имя нового файла (с указанием расширения).");
+        String fileName = sc.nextLine(); // задаем переменную "имя файла", с присвоением значения из консоли
+
+        Files.copy(input, Paths.get(fileName)); // копируем полученные данные в новый файл
     }
 
 }
